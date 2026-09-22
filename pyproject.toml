@@ -1,0 +1,128 @@
+[project]
+name = "kanki-server"
+version = "0.1.0"
+description = "Pydase Service for studying cantonese vocabulary."
+authors = [
+  {name = "Maximilian Otto Schmid, email = <m.o.schmid@hotmail.com>"}
+]
+readme = "README.md"
+packages = [{include = "kanki_server"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fsrs = "^6.3.2"
+pydase = "^0.10.21"
+toml = ">=0.10.2,<0.11.0"
+python-socketio = ">=5.13.0,<6.0.0"
+confz = ">=2.1.0,<3.0.0"
+pint = ">=0.24.4,<0.25.0"
+websocket-client = ">=1.8.0,<2.0.0"
+aiohttp = ">=3.11.18,<4.0.0"
+click = ">=8.2.0,<9.0.0"
+aiohttp-middlewares = ">=2.4.0,<3.0.0"
+anyio = ">=4.9.0,<5.0.0"
+logging = ">=0.4.9.6,<0.5.0.0"
+typing-extensions = "*"
+playsound3 = "^3.3.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.3"
+mypy = "^1.1.1"
+pyright = "^1.1.323"
+pre-commit = "^4.1.0"
+ipykernel = "^7.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+include = ["src", "test"]
+typeCheckingMode = "basic"
+
+[tool.ruff]
+target-version = "py310" # Always generate Python 3.10-compatible code
+line-length = 120
+lint.select = [
+    "ASYNC", # flake8-async
+    "C4",    # flake8-comprehensions
+    "E",     # pycodestyle errors
+    "ERA",   # eradicate
+    "F",     # pyflakes
+    "FLY",   # flynt
+    "G",     # flake8-logging-format
+    "I",     # isort
+    "ICN",   # flake8-import-conventions
+    "INP",   # flake8-no-pep420
+    "ISC",   # flake8-implicit-str-concat
+    "N",     # pep8-naming
+    "NPY",   # NumPy-specific rules
+    "PERF",  # perflint
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "PYI",   # flake8-pyi
+    "Q",     # flake8-quotes
+    "RET",   # flake8-return
+    "RUF",   # Ruff-specific rules
+    "SIM",   # flake8-simplify
+    "TID",   # flake8-tidy-imports
+    "TCH",   # flake8-type-checking
+    "UP",    # pyupgrade
+    "YTT",   # flake8-2020
+    "W",     # pycodestyle warnings
+]
+lint.ignore = [
+    "PERF203",  # try-except-in-loop
+    "RET505",   # conditional return statements
+    "PLR0913",  # too many arguments
+    "RET505",   # unneccesary assignment before return
+    "PLR0912",  # too long function definition
+    "PLR0915",  # too long function definition
+    "W293",     # blank line contains whitespaceRuff
+    "PLC2401",  # contains a non-ASCII character
+    "I001",     # import block is un-sorted or un-formatted
+    "TID252",   # prefer absolute imports over relative imports from parent modules
+    "INP001",   # implicit namespace package.
+]
+extend-exclude = [
+  "docs", "frontend"
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 7
+
+[tool.mypy]
+show_error_codes = true
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" =  [
+    "ASYNC", # flake8-async
+    "C4",    # flake8-comprehensions
+    "E",     # pycodestyle errors
+    "ERA",   # eradicate
+    "F",     # pyflakes
+    "FLY",   # flynt
+    "G",     # flake8-logging-format
+    "I",     # isort
+    "ICN",   # flake8-import-conventions
+    "INP",   # flake8-no-pep420
+    "ISC",   # flake8-implicit-str-concat
+    "N",     # pep8-naming
+    "NPY",   # NumPy-specific rules
+    "PERF",  # perflint
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "PYI",   # flake8-pyi
+    "Q",     # flake8-quotes
+    "RET",   # flake8-return
+    "RUF",   # Ruff-specific rules
+    "SIM",   # flake8-simplify
+    "TID",   # flake8-tidy-imports
+    "TCH",   # flake8-type-checking
+    "UP",    # pyupgrade
+    "YTT",   # flake8-2020
+    "W",     # pycodestyle warnings
+]
