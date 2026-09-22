@@ -1,8 +1,8 @@
-import pydase
+from pydase import DataService
 from kanki_server.settings.vocabulary_settings import VocabularySettings
 from kanki_server.settings.tone_trainer_settings import ToneTrainerSettings
 
-class Menu(pydase.DataService):
+class Menu(DataService):
     def __init__(self) -> None:
         super().__init__()
 

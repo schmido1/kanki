@@ -7,7 +7,7 @@ from pydase import DataService
 from pydase.utils.decorators import frontend
 from kanki_server.utils.enums import Tones
 
-class ToneTrainer(pydase.DataService):
+class ToneTrainer(DataService):
     def __init__(
             self,
             ask_tone1: bool,
@@ -29,7 +29,7 @@ class ToneTrainer(pydase.DataService):
         self._ask_tone6 = ask_tone6
 
         # load the word dictionaries
-        with open(self._deck_directory / "vocabulary/words.json") as fp:
+        with open(self._deck_directory + "/vocabulary/words.json") as fp:
             self._words_dict = json.load(fp)
         
         self._ids = list(self._words_dict.keys())

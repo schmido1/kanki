@@ -1,6 +1,7 @@
 import json
 import os
 import random
+from pathlib import Path
 from datetime import datetime, timezone
 from playsound3 import playsound
 
@@ -281,7 +282,9 @@ class WordCard(DataService):
         if isinstance(word, Word):
             if show_frontside:
                 if id > 0:
-                    files = list(deck_directory.glob(f"audio/{id:04d}_*.mp3"))
+                    files = list(deck_directory.glob(
+                        f"vocabulary/audio/{id:04d}_*.mp3")
+                    )
                     if files:
                         playsound(files[0], False)
                     else:
@@ -297,7 +300,9 @@ class WordCard(DataService):
                     elif word.type == Type.Phoneme:
                         self.backside = BacksideForwardPhoneme(word)
                 elif id < 0:
-                    files = list(deck_directory.glob(f"audio/{abs(id):04d}_*.mp3"))
+                    files = list(deck_directory.glob(
+                        f"vocabulary/audio/{abs(id):04d}_*.mp3"
+                    ))
                     if files:
                         playsound(files[0], False)
                     else:
@@ -323,23 +328,20 @@ class Vocabulary(DataService):
         self._new_words_per_day = new_words_per_day
         self._characters = characters
 
-        self._deck_directory = os.environ["KANKI_DECK_DIR"]
+        self._deck_directory = Path(os.environ["KANKI_DECK_DIR"])
         self._scheduler = Scheduler() # TODO: Import from json
 
         # load the mapping dictionary
         with open(
-            self._deck_directory + "/personal/mapping.json") as fp:
+            self._deck_directory / "personal/mapping.json") as fp:
             self._mapping_dict = json.load(fp)
         
         # load the word dictionaries
-        with open(self._deck_directory + "vocabulary/words.json") as fp:
+        with open(self._deck_directory / "vocabulary/words.json") as fp:
             self._words_dict = json.load(fp)
 
         # load the card dictionary
-        with open(
-            self._deck_directory
-            + "/personal/cards.json"
-        ) as fp:
+        with open(self._deck_directory / "personal/cards.json") as fp:
             self._cards_dict = json.load(fp)
 
         # define the ids for the new words
@@ -440,7 +442,7 @@ class Vocabulary(DataService):
             self._cards_dict[str(self._current_id)] = current_card_dict
             
             # save card dict json
-            with open(self._deck_directory + "/personal/cards.json", "w") as fp:
+            with open(self._deck_directory / "personal/cards.json", "w") as fp:
                 json.dump(self._cards_dict, fp, indent=4)
             
             

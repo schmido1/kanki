@@ -1,5 +1,5 @@
-import pydase
+from pydase import DataService
 
-class Idioms(pydase.DataService):
+class Idioms(DataService):
     def __init__(self) -> None:
-        pass
+        super().__init__()

@@ -5,7 +5,7 @@ from .utils.config import KankiServiceConfig
 from .kanki import Kanki
 
 service = Kanki()
-print(KankiServiceConfig().web_port)
+
 Server(
     service=service,
     css=ServiceConfig().config_dir / "custom.css",

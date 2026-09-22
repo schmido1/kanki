@@ -29,3 +29,12 @@ export KANKI_DECK_DIR="directory/to/config/files"
 ```
  poetry run python -m "kanki_server"
 ```
+
+# TODOs
+- Expand ReadMe
+- Add stories to cards
+- Improve scheduler
+- Add missing modes
+- Add space key like in anki
+- Save menu settings permanently
+- Replay audio button
